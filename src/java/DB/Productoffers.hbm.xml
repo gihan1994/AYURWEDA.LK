@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Productoffers" table="productoffers" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idProductOffers" type="java.lang.Integer">
+            <column name="idProductOffers" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="grnHasProducts" class="DB.GrnHasProducts" fetch="select">
+            <column name="grn_has_products_IdGRNhasProduct" not-null="true" />
+        </many-to-one>
+        <property name="presentage" type="java.lang.Integer">
+            <column name="presentage" />
+        </property>
+        <property name="dateofview" type="date">
+            <column name="dateofview" length="10" />
+        </property>
+        <property name="offerstatus" type="string">
+            <column name="offerstatus" length="45" />
+        </property>
+        <property name="offerqty" type="java.lang.Integer">
+            <column name="offerqty" />
+        </property>
+        <property name="datestatus" type="string">
+            <column name="datestatus" length="45" />
+        </property>
+        <property name="dateofadded" type="date">
+            <column name="dateofadded" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

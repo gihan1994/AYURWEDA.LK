@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.User" table="user" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idUser" type="java.lang.Integer">
+            <column name="idUser" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usertype" class="DB.Usertype" fetch="select">
+            <column name="UserType_idUserType" not-null="true" />
+        </many-to-one>
+        <property name="fname" type="string">
+            <column name="fname" length="45" />
+        </property>
+        <property name="lname" type="string">
+            <column name="lname" length="45" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="tel" type="string">
+            <column name="tel" length="45" />
+        </property>
+        <property name="signDate" type="date">
+            <column name="signDate" length="10" />
+        </property>
+        <property name="uimg" type="string">
+            <column name="uimg" length="500" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <set name="productreviews" table="productreview" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Productreview" />
+        </set>
+        <set name="carts" table="cart" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Cart" />
+        </set>
+        <set name="notificationses" table="notifications" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Notifications" />
+        </set>
+        <set name="ratingses" table="ratings" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Ratings" />
+        </set>
+        <set name="orderings" table="ordering" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Ordering" />
+        </set>
+        <set name="userHasProductsReviews" table="user_has_products_review" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.UserHasProductsReview" />
+        </set>
+        <set name="feedbacks" table="feedback" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Feedback" />
+        </set>
+        <set name="wishlists" table="wishlist" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Wishlist" />
+        </set>
+        <set name="invoices" table="invoice" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Invoice" />
+        </set>
+        <set name="logins" table="login" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Login" />
+        </set>
+        <set name="shippingorders" table="shippingorder" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Shippingorder" />
+        </set>
+        <set name="messageses" table="messages" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="DB.Messages" />
+        </set>
+    </class>
+</hibernate-mapping>

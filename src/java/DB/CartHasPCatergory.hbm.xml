@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.CartHasPCatergory" table="cart_has_p_catergory" catalog="ayurwedalkdb" optimistic-lock="version">
+        <composite-id name="id" class="DB.CartHasPCatergoryId">
+            <key-property name="cartIdCart" type="int">
+                <column name="Cart_idCart" />
+            </key-property>
+            <key-property name="PCatergoryIdPCatergory" type="int">
+                <column name="P_Catergory_idP_Catergory" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cart" class="DB.Cart" update="false" insert="false" fetch="select">
+            <column name="Cart_idCart" not-null="true" />
+        </many-to-one>
+        <many-to-one name="PCatergory" class="DB.PCatergory" update="false" insert="false" fetch="select">
+            <column name="P_Catergory_idP_Catergory" not-null="true" />
+        </many-to-one>
+        <property name="qty" type="java.lang.Integer">
+            <column name="qty" />
+        </property>
+        <property name="ptotal" type="java.lang.Integer">
+            <column name="ptotal" />
+        </property>
+    </class>
+</hibernate-mapping>

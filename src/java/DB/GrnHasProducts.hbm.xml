@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.GrnHasProducts" table="grn_has_products" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idGrnhasProduct" type="java.lang.Integer">
+            <column name="IdGRNhasProduct" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="grn" class="DB.Grn" fetch="select">
+            <column name="GRN_idGRN" not-null="true" />
+        </many-to-one>
+        <many-to-one name="products" class="DB.Products" fetch="select">
+            <column name="Products_idProducts" not-null="true" />
+        </many-to-one>
+        <property name="qty" type="java.lang.Integer">
+            <column name="qty" />
+        </property>
+        <property name="sellprice" type="java.lang.Double">
+            <column name="sellprice" precision="10" scale="0" />
+        </property>
+        <property name="buyprice" type="java.lang.Double">
+            <column name="buyprice" precision="10" scale="0" />
+        </property>
+        <property name="grnpstatus" type="string">
+            <column name="GRNPstatus" length="45" />
+        </property>
+        <property name="qtystatus" type="string">
+            <column name="qtystatus" length="45" />
+        </property>
+        <property name="addqty" type="java.lang.Integer">
+            <column name="addqty" />
+        </property>
+        <set name="invoiceHasGrnHasProductses" table="invoice_has_grn_has_products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grn_has_products_IdGRNhasProduct" not-null="true" />
+            </key>
+            <one-to-many class="DB.InvoiceHasGrnHasProducts" />
+        </set>
+        <set name="wishlistHasGrnHasProductses" table="wishlist_has_grn_has_products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grn_has_products_IdGRNhasProduct" not-null="true" />
+            </key>
+            <one-to-many class="DB.WishlistHasGrnHasProducts" />
+        </set>
+        <set name="productofferses" table="productoffers" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="grn_has_products_IdGRNhasProduct" not-null="true" />
+            </key>
+            <one-to-many class="DB.Productoffers" />
+        </set>
+    </class>
+</hibernate-mapping>

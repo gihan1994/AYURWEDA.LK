@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Products" table="products" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idProducts" type="java.lang.Integer">
+            <column name="idProducts" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="PCatergory" class="DB.PCatergory" fetch="select">
+            <column name="P_Catergory_idP_Catergory" not-null="true" />
+        </many-to-one>
+        <property name="productName" type="string">
+            <column name="ProductName" length="45" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="1000" />
+        </property>
+        <property name="img" type="string">
+            <column name="img" length="500" />
+        </property>
+        <property name="tolQty" type="java.lang.Integer">
+            <column name="tol_qty" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <set name="productreviews" table="productreview" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="products_idProducts" not-null="true" />
+            </key>
+            <one-to-many class="DB.Productreview" />
+        </set>
+        <set name="userHasProductsReviews" table="user_has_products_review" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Products_idProducts" not-null="true" />
+            </key>
+            <one-to-many class="DB.UserHasProductsReview" />
+        </set>
+        <set name="cartHasProductses" table="cart_has_products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Products_idProducts" not-null="true" />
+            </key>
+            <one-to-many class="DB.CartHasProducts" />
+        </set>
+        <set name="ratingses" table="ratings" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Products_idProducts" not-null="true" />
+            </key>
+            <one-to-many class="DB.Ratings" />
+        </set>
+        <set name="productsellings" table="productselling" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Products_idProducts" not-null="true" />
+            </key>
+            <one-to-many class="DB.Productselling" />
+        </set>
+        <set name="productsHasBrandses" table="products_has_brands" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Products_idProducts" not-null="true" />
+            </key>
+            <one-to-many class="DB.ProductsHasBrands" />
+        </set>
+        <set name="grnHasProductses" table="grn_has_products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Products_idProducts" not-null="true" />
+            </key>
+            <one-to-many class="DB.GrnHasProducts" />
+        </set>
+    </class>
+</hibernate-mapping>

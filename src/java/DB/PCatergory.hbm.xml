@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.PCatergory" table="p_catergory" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idPCatergory" type="java.lang.Integer">
+            <column name="idP_Catergory" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="shipping" class="DB.Shipping" fetch="select">
+            <column name="Shipping_idShipping" not-null="true" />
+        </many-to-one>
+        <property name="catName" type="string">
+            <column name="cat_name" length="45" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <set name="productses" table="products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="P_Catergory_idP_Catergory" not-null="true" />
+            </key>
+            <one-to-many class="DB.Products" />
+        </set>
+        <set name="cartHasPCatergories" table="cart_has_p_catergory" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="P_Catergory_idP_Catergory" not-null="true" />
+            </key>
+            <one-to-many class="DB.CartHasPCatergory" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Returnorder" table="returnorder" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idReturnOrder" type="java.lang.Integer">
+            <column name="idReturnOrder" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="dispatchorders" class="DB.Dispatchorders" fetch="select">
+            <column name="DispatchOrders_idDispatchOrders" not-null="true" />
+        </many-to-one>
+        <property name="reson" type="string">
+            <column name="Reson" length="1000" />
+        </property>
+        <property name="returndate" type="date">
+            <column name="returndate" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Company" table="company" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idCompany" type="java.lang.Integer">
+            <column name="idCompany" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45" />
+        </property>
+        <property name="regiNo" type="string">
+            <column name="regi_no" length="45" />
+        </property>
+        <property name="regiDate" type="date">
+            <column name="regi_date" length="10" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="45" />
+        </property>
+        <property name="startDate" type="string">
+            <column name="start_date" length="45" />
+        </property>
+        <property name="awared" type="string">
+            <column name="awared" length="45" />
+        </property>
+        <set name="suppliers" table="supplier" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Company_idCompany" not-null="true" />
+            </key>
+            <one-to-many class="DB.Supplier" />
+        </set>
+    </class>
+</hibernate-mapping>

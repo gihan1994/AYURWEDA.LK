@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Invoice" table="invoice" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idInvoice" type="java.lang.Integer">
+            <column name="idInvoice" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="DB.User" fetch="select">
+            <column name="User_idUser" not-null="true" />
+        </many-to-one>
+        <property name="total" type="java.lang.Double">
+            <column name="total" precision="22" scale="0" />
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+        <set name="orderings" table="ordering" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="invoice_idInvoice" not-null="true" />
+            </key>
+            <one-to-many class="DB.Ordering" />
+        </set>
+        <set name="invoiceHasGrnHasProductses" table="invoice_has_grn_has_products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="invoice_idInvoice" not-null="true" />
+            </key>
+            <one-to-many class="DB.InvoiceHasGrnHasProducts" />
+        </set>
+    </class>
+</hibernate-mapping>

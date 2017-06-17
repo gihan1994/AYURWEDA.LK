@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Supplier" table="supplier" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idSupplier" type="java.lang.Integer">
+            <column name="idSupplier" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="company" class="DB.Company" fetch="select">
+            <column name="Company_idCompany" not-null="true" />
+        </many-to-one>
+        <property name="fullName" type="string">
+            <column name="fullName" length="500" />
+        </property>
+        <property name="street1" type="string">
+            <column name="street1" length="45" />
+        </property>
+        <property name="street2" type="string">
+            <column name="street2" length="45" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="45" />
+        </property>
+        <property name="pcode" type="string">
+            <column name="pcode" length="45" />
+        </property>
+        <property name="tel" type="string">
+            <column name="tel" length="45" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="webSite" type="string">
+            <column name="webSite" length="45" />
+        </property>
+        <property name="supplierRequestIdSupplierRequest" type="int">
+            <column name="SupplierRequest_idSupplierRequest" not-null="true" />
+        </property>
+        <property name="ratings" type="java.lang.Double">
+            <column name="ratings" precision="22" scale="0" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <property name="joinDate" type="date">
+            <column name="joinDate" length="10" />
+        </property>
+        <set name="grns" table="grn" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Supplier_idSupplier" not-null="true" />
+            </key>
+            <one-to-many class="DB.Grn" />
+        </set>
+    </class>
+</hibernate-mapping>

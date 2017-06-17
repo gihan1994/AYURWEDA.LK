@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Brands" table="brands" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idBrands" type="java.lang.Integer">
+            <column name="idBrands" />
+            <generator class="identity" />
+        </id>
+        <property name="brandname" type="string">
+            <column name="brandname" length="45" not-null="true" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="45" />
+        </property>
+        <set name="productsHasBrandses" table="products_has_brands" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Brands_idBrands" not-null="true" />
+            </key>
+            <one-to-many class="DB.ProductsHasBrands" />
+        </set>
+    </class>
+</hibernate-mapping>

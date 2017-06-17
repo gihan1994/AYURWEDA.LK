@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Dispatchorders" table="dispatchorders" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idDispatchOrders" type="java.lang.Integer">
+            <column name="idDispatchOrders" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ordering" class="DB.Ordering" fetch="select">
+            <column name="Order_idOrder" not-null="true" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+        <property name="time" type="time">
+            <column name="time" length="8" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <property name="cusComent" type="string">
+            <column name="cus_coment" length="800" />
+        </property>
+        <set name="productreviews" table="productreview" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dispatchorders_idDispatchOrders" not-null="true" />
+            </key>
+            <one-to-many class="DB.Productreview" />
+        </set>
+        <set name="returnorders" table="returnorder" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="DispatchOrders_idDispatchOrders" not-null="true" />
+            </key>
+            <one-to-many class="DB.Returnorder" />
+        </set>
+    </class>
+</hibernate-mapping>

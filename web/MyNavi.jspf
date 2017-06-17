@@ -1,0 +1,449 @@
+<%-- any content can be specified here e.g.: --%>
+
+<%@page import="DB.Wishlist"%>
+<%@page import="DB.Ordering"%>
+<%@page import="DB.PCatergory"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="DB.User"%>
+<%@page import="DB.Login"%>
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="java.util.List"%>
+<%@page import="DB.Usertype"%>
+<%@page import="Connection.NewHibernateUtil"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@ page pageEncoding="UTF-8" %>
+<!--<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">-->
+<style>
+    /*    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+            background-color: #000000;
+            color: #ffffff;
+        }*/
+ .userDynView{
+                 z-index: 1000;
+                 width:250px;height:350px;
+                 
+            }
+    .navbar {
+       /*font-family: 'Raleway', sans-serif;*/
+        margin-bottom: 0;
+        /*background-color: #2d2d30;*/
+        background-color: #012231;
+        border: 0;
+        font-size: 14px !important;
+        letter-spacing: 4px;
+
+        /*opacity: 0.9;*/
+    }
+    .navbar li a, .navbar .navbar-brand {
+        color: #d5d5d5 !important;
+    }
+    .navbar-nav li a:hover {
+        color: #000000 !important;
+    }
+    .navbar-nav li.active a {
+        color: #000000 !important;
+        background-color: #29292c !important;
+    }
+    .navbar-default .navbar-toggle {
+        border-color: transparent;
+    }
+
+    ul.nav li.dropdown{
+        color: #012231;
+
+    }
+    .nav-link active{
+
+        color: #d5d5d5;
+        /*visibility:visible*/ 
+    }
+
+    .goog-te-gadget {
+        font-size: 19px !important;
+    } 
+
+    .navbar-fixed {
+        top: 0;
+        z-index: 100;
+        position: fixed;
+        width: 100%;
+    }
+
+</style>
+
+<script  type="text/javascript">
+
+//session invalidate when browser close
+var validNavigation = 0;
+function endSession() {
+    // Browser or Broswer tab is closed
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+        }
+    };
+    xhttp.open("POST", 'SessionInvalidate', true);
+    xhttp.send();
+}
+
+function bindDOMEvents() {
+//     unload works on both closing tab and on refreshing tab.     
+    $(window).unload(function () {
+        if (validNavigation == 0) {
+            endSession();
+        }
+    });
+// Attach the event keypress to exclude the F5 refresh
+    $(document).keydown(function (e) {
+        var key = e.which || e.keyCode;
+        if (key == 116) {
+            validNavigation = 1;
+        }
+    });
+// Attach the event click for all links in the page
+    $("a").bind("click", function () {
+        validNavigation = 1;
+    });
+    // Attach the event submit for all forms in the page
+    $("form").bind("submit", function () {
+        validNavigation = 1;
+    });
+    // Attach the event click for all inputs in the page
+    $("input[type=submit]").bind("click", function () {
+        validNavigation = 1;
+    });
+}
+// Wire up the events as soon as the DOM tree is ready
+$(document).ready(function () {
+    bindDOMEvents();
+});
+
+
+
+
+    var tolitemscount='No items';
+    function start_count() {
+        alert('start_count');
+        //Add your code here
+    }
+
+    function userPoppover() {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {// 
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+
+ $("#userpdiv").hide().html(xhttp.responseText).fadeIn('slow'); 
+              
+                
+//                $("#userpdiv").load(xhttp.responseText);
+            }
+        };
+        xhttp.open("GET", "DynamicUserView.jsp", true);
+
+        xhttp.send();
+
+    }
+
+   
+
+      function sendCartItemRequest() {
+
+        var xhttpGetItemCount = new XMLHttpRequest();
+        xhttpGetItemCount.onreadystatechange = function() {// 
+            if (xhttpGetItemCount.readyState === 4 && xhttpGetItemCount.status === 200) {
+
+                if (xhttpGetItemCount.responseText !== null) {
+
+                    var count = xhttpGetItemCount.responseText;
+                    
+                    
+                    if (count === "0") {
+                        
+                        document.getElementById('itemcount').innerHTML= "No Item";
+
+                    } else {
+                        
+                        document.getElementById('itemcount').innerHTML= xhttpGetItemCount.responseText + " items";
+                    }
+
+
+                }
+
+
+            }
+        };
+        xhttpGetItemCount.open("GET", "CartItemCount?itemcount=cartitem", true);
+        xhttpGetItemCount.send();
+    }
+
+    function sendNotiItemRequest(){
+        var xhttpNotiItemCount = new XMLHttpRequest();
+        xhttpNotiItemCount.onreadystatechange = function() {// 
+            if (xhttpNotiItemCount.readyState === 4 && xhttpNotiItemCount.status === 200) {
+                $('#noticount').ready(function (){
+                    var count = xhttpNotiItemCount.responseText;
+                    if (count !="0"&&count!=null) {
+                           
+                      $('#noticount').ready(function (){
+                           document.getElementById('noticount').innerHTML= xhttpNotiItemCount.responseText; 
+                          
+                      });
+                            
+                            
+                            
+                    }                    
+                });
+                
+            }
+        };
+        xhttpNotiItemCount.open("GET", "UserViewManager?GetUpdate=ok&totalcount=ok", true);
+        xhttpNotiItemCount.send(); 
+        
+    }
+   
+
+    $(document).ready(function() {
+        
+      $('#itemcount').ready(function (){
+         sendCartItemRequest();
+          
+      });  
+     $('#noticount').ready(function (){
+         sendNotiItemRequest();
+          
+      });    
+        
+     $('[data-toggle="userpopover"]').popover(function (){
+         
+         userPoppover();
+     });
+        
+        $('ul.nav li.dropdown').hover(function() {
+
+
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(100);
+        }, function() {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(100);
+        });
+
+
+//cart btn hover events
+        $("#cart-btn").mouseenter(function() {
+            $(this).attr('src', 'img/cart_hover.png');
+                   $(this).css('width','35px');
+            $(this).css('height','35px');
+            
+        });
+        $("#cart-btn").mouseleave(function() {
+            $(this).attr('src', 'img/cart.png');
+                   $(this).css('width','30px');
+            $(this).css('height','30px');
+        });
+
+//profile btn hover events
+        $("#userprofpic").mouseenter(function() {
+            $(this).animate({'opacity': '1'}, {
+                duration: 50,
+                step: function() {
+                  $(this).css('width','55px');
+            $(this).css('height','55px');
+                }
+
+            });
+            ;
+            
+
+        });
+        $("#userprofpic").mouseleave(function() {
+            $(this).animate({'opacity': '1'}, {
+                duration: 50,
+                step: function() {
+                         $(this).css('width','50px');
+            $(this).css('height','50px');
+                }
+
+            });
+            ;
+        });
+
+
+    });
+
+
+</script>
+
+
+
+
+<!--<div class="container">-->
+<nav class="navbar navbar-fixed-top"  id="nav_bar" >
+
+
+    <div class="navbar-header" >
+
+        <a href="Home.jsp">
+            <img src="img/hedderCover2.png" style="width:180px;height:50px;margin-left:20px " class="img-responsive">
+        </a>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+        <ul class="nav navbar-nav">
+
+           
+
+            <li class="nav-item"> 
+                <!--login-->
+            </li>
+            <li class="nav-item "><a href="Home.jsp" class="nav-link active">Home</a></li>
+            <li class="nav-item dropdown ">
+                <a href="ViewProduct.jsp" onclick="location.href = 'ViewProduct.jsp'" class="nav-link dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">Products<span class="caret"></span></a>
+                <ul class="dropdown-menu" style="background-color:#012231 " >
+
+                    <%
+                        Session navs = NewHibernateUtil.getSessionFactory().openSession();
+                        List<PCatergory> pcl2 = navs.createCriteria(DB.PCatergory.class).list();
+//                                    
+                        if (pcl2.size() > 0) {
+                            for (PCatergory pi2 : pcl2) {
+
+                    %>
+
+                    <li><a href="#" class="dropdown-item" ><% out.print(pi2.getCatName()); %></a></li>
+
+
+                    <%
+                            }
+                        }
+
+                    %>
+                </ul>
+            </li>
+
+            <li class="nav-item"><a href="AboutUs.jsp" class="nav-link ">About Us</a></li>
+
+            <%                                Session naviss = NewHibernateUtil.getSessionFactory().openSession();
+                String upicimgpath="img/DefaltUser.png";
+               
+                if (request.getSession().getAttribute("username") != null) {
+
+                     Login adl= (Login) naviss
+                            .createCriteria(DB.Login.class).add(Restrictions.eq("username", request.getSession().getAttribute("username"))).uniqueResult();
+
+                    if(adl!=null){
+                    Usertype ut = (Usertype) naviss.createCriteria(DB.Usertype.class).add(Restrictions.eq("typeName", "Admin")).uniqueResult();
+                    Usertype ut1 = (Usertype) naviss.createCriteria(DB.Usertype.class).add(Restrictions.eq("typeName", "SuperAdmin")).uniqueResult();
+
+                    if (ut.equals(adl.getUser().getUsertype())||ut1.equals(adl.getUser().getUsertype())) {
+
+            %>
+            <li class="nav-item"><a onclick="window.open('AdminPanel.jsp')" class="nav-link " style="font-weight:bold;color:#ff3300;font-size:18px;">Admin Panel</a></li>
+                <%}
+                    
+                    if(adl.getUser().getUimg()!=null){
+                     upicimgpath=adl.getUser().getUimg();
+                        
+                    }
+                    
+                    }
+                    
+                }
+                    
+                %> 
+
+
+
+        </ul>
+
+
+
+        <ul class="nav  navbar-nav navigation navigation-right" style="display:inline-block;padding-left:3%;width:100%; position:absolute ">
+
+
+            <li class="nav-item" style="">
+                <%
+                    String setuname = "Hi Guest";
+                    if (request.getSession().getAttribute("username") != null) {
+
+                        setuname = request.getSession().getAttribute("username").toString() + "!";
+                    } else {
+                        setuname = " Guest!";
+                    }
+
+                %>
+
+                <h4 style="font-weight:bold;color: #ffffff  " class="navbar-text" id="username">Hi <span style="color:#ff9933 "><%                                         out.print(setuname);
+                        %></span></h4> </li>
+
+            <li class="nav-item" style="">
+                <div style=" display: block;height: 100%;margin-bottom:10px  " onshow="">
+                    <a href="Cart_test.jsp">
+                        <div style="display: inline-block;width: 100%;height:50% ">
+                          <span class="badge" style="background-color:#ff3300;color:#ffffff;letter-spacing:0px;" id="itemcount"  >No item  
+                        </span>  
+                        </div>
+                        <div style="display: inline-block;width: 100%;height:50% ">
+                            <img src="img/cart.png" class="img-rounded"  style="cursor: pointer;width: 30px;height:30px  " alt="Responsive image" id="cart-btn">
+                        </div>
+                        
+                        
+                    </a>
+                </div>   
+
+            </li>
+            
+            <li class="nav-item" style="">
+                
+                
+                
+                
+                <div onclick="userPoppover()" style="border-color: transparent;width:100%;margin-left:50% "     tabindex="0"  data-html="true" data-container="body" data-toggle="userpopover" data-trigger="focus"  data-placement="bottom" 
+                     data-content="<div class='userDynView'  id='userpdiv' ></div>">
+                    <!--set Notification for ordering-->
+                    <%
+                if(request.getSession().getAttribute("username") != null){
+                Login notil= (Login) naviss
+                            .createCriteria(DB.Login.class).add(Restrictions.eq("username", request.getSession().getAttribute("username"))).uniqueResult();
+                if(notil!=null){
+                  
+                        %>
+                  
+                        <span class="badge" id="noticount" style="rotation:100deg;letter-spacing:0px; position: absolute;color: #000000;background-color:#ffff00;margin-left:3%;font-weight: bold "></span>    
+                       
+                        <% }
+                
+                }
+                
+                    %>
+                    <img  src="<%=upicimgpath%>" id="userprofpic" class="img-circle" style="cursor: pointer;border-color: transparent;width: 50px;height:50px "    alt="No Image">
+                    
+                </div>
+               
+
+            </li>
+            
+          
+        </ul>  
+
+
+
+
+    </div>
+
+
+
+    <!-- /.navbar-collapse -->
+    <!-- /.container-fluid -->
+</nav>
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+

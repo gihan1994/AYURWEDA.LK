@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Shippingorder" table="shippingorder" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idShippingOrder" type="java.lang.Integer">
+            <column name="idShippingOrder" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="DB.User" fetch="select">
+            <column name="User_idUser" not-null="true" />
+        </many-to-one>
+        <property name="recieverName" type="string">
+            <column name="recieverName" length="145" />
+        </property>
+        <property name="street1" type="string">
+            <column name="street1" length="200" />
+        </property>
+        <property name="street2" type="string">
+            <column name="street2" length="200" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="45" />
+        </property>
+        <property name="postalcode" type="string">
+            <column name="postalcode" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

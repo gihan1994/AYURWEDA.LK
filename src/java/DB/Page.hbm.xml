@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Page" table="page" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idPage" type="java.lang.Integer">
+            <column name="idPage" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="300" />
+        </property>
+        <set name="usertypeHasPages" table="usertype_has_page" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Page_idPage" not-null="true" />
+            </key>
+            <one-to-many class="DB.UsertypeHasPage" />
+        </set>
+        <set name="logintimesHasPages" table="logintimes_has_page" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Page_idPage" not-null="true" />
+            </key>
+            <one-to-many class="DB.LogintimesHasPage" />
+        </set>
+    </class>
+</hibernate-mapping>

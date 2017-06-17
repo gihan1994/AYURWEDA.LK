@@ -1,0 +1,125 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ page pageEncoding="UTF-8" %>
+
+        <script>
+
+            $(document).ready(function() {
+
+                $(".comments,.dropdown-menu li a").click(function() {
+                    $(".commentbtn,.btn:first-child").html($(this).text() + ' <span class="caret"></span>');
+                });
+
+
+
+
+$('[data-toggle="tab"]').tooltip({
+    trigger: 'hover',
+    placement: 'top',
+    animate: true,
+    delay: 500,
+    container: 'body'
+});
+
+            });
+
+        </script>
+
+        <div  style="background-color:#012231;display: inline-block ;" class="footer-w3l">
+
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="col-md-4">
+                    <div style="display: inline-block"><br></div>
+                    <div style="display: inline-block">
+                        <label class="label label-info " >Comments & Complains</label>
+                    <form>
+                        <div class="form-group">
+
+                            <label for="exampleInputEmail1" style="color:white">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <!--combo here-->
+                             <label for="exampleInputFile" style="color:white">Select Message Type</label>
+                                <select class="form-control" id="sel1" name="pcat">
+                                    <option value="Complain">Complain</option> 
+                                    <option value="Comments">Comments</option> 
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label  style="color:white">Description</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <center><button type="submit" class="btn btn-default mybtnfooter" align="right">Submit</button></center>
+                    </form> 
+                        <br>
+                    </div>
+                    <div style="display: inline-block"><br></div>
+                    <
+                </div>
+                <div class="col-md-4">
+                    <div style="display: inline-block">
+                        <lable class="lable active"><h4 style="color: white">Contact Us</h4></lable>
+                    </div> 
+                    <div style="display: inline-block">
+                        <h4 style="color: white">
+                            <small style="color: white" >
+                                HOTLINE: 0773 98 39 74 <br><br>
+                                Tel: 0332 229 216 <br>
+                                Fax: 0332 229 216 <br>
+                                Email: info@Aurweda.lk <br>
+                                Head Office: 22/b pitiyegedara, Bemmulla.     
+                            </small>
+
+                        </h4>
+                    </div> 
+                    <div style="display: inline-block"></div> 
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div style="display: inline-block">
+                        <lable class="lable active"><h4 style="color: white">Get Social With Us</h4></lable>
+                    </div>
+                    <div style="display: inline-block">
+                        
+                        <div class="col-xs-6 col-md-3" >
+                            <a href="#"  data-toggle="tab" data-original-title="FaceBook">
+                                <img src="img/fb.png" alt="..."  width="40px" height="40px" class="footer-icon-color">
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-md-3" >
+                            <a href="#"   data-toggle="tab" data-original-title="Twitter">
+                                <img src="img/Twitter.png" alt="..."  width="40px" height="40px" class="footer-icon-color">
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <a href="#"   data-toggle="tab" data-original-title="Instagram">
+                                <img src="img/Instagram.png" alt="..." width="40px" height="40px" class="footer-icon-color">
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-md-3" >
+                            <a href="#"   data-toggle="tab" data-original-title="Google+" >
+                                <img src="img/gplus.png" alt="..." width="40px" height="40px" class="footer-icon-color">
+                            </a>
+                        </div>
+                    </div>
+                    <div style="display: inline-block">
+                        <h3 style="color: #cccccc">©Copyright <% 
+                            out.print(new SimpleDateFormat("yyyy").format(new Date()));
+                        %> Ayurweda.lk</h3>
+                        <h3><small>Powered by Gihan Munasinghe</small></h3>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <br>
+           
+
+        </div>
+

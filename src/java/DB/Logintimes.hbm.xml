@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Logintimes" table="logintimes" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idLoginTimes" type="java.lang.Integer">
+            <column name="idLoginTimes" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="login" class="DB.Login" fetch="select">
+            <column name="Login_idLogin" not-null="true" />
+        </many-to-one>
+        <property name="logdate" type="date">
+            <column name="logdate" length="10" />
+        </property>
+        <property name="intime" type="time">
+            <column name="intime" length="8" />
+        </property>
+        <property name="outtime" type="time">
+            <column name="outtime" length="8" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <set name="loginActivities" table="login_activity" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="LoginTimes_idLoginTimes" not-null="true" />
+            </key>
+            <one-to-many class="DB.LoginActivity" />
+        </set>
+        <set name="logintimesHasPages" table="logintimes_has_page" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="LoginTimes_idLoginTimes" not-null="true" />
+            </key>
+            <one-to-many class="DB.LogintimesHasPage" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Login" table="login" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idLogin" type="java.lang.Integer">
+            <column name="idLogin" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="DB.User" fetch="select">
+            <column name="User_idUser" not-null="true" />
+        </many-to-one>
+        <property name="username" type="string">
+            <column name="username" length="45" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <set name="logintimeses" table="logintimes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Login_idLogin" not-null="true" />
+            </key>
+            <one-to-many class="DB.Logintimes" />
+        </set>
+    </class>
+</hibernate-mapping>

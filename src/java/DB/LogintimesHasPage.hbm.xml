@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.LogintimesHasPage" table="logintimes_has_page" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idLogintimehasPage" type="java.lang.Integer">
+            <column name="idLogintimehasPage" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="logintimes" class="DB.Logintimes" fetch="select">
+            <column name="LoginTimes_idLoginTimes" not-null="true" />
+        </many-to-one>
+        <many-to-one name="page" class="DB.Page" fetch="select">
+            <column name="Page_idPage" not-null="true" />
+        </many-to-one>
+        <property name="viewTime" type="time">
+            <column name="view_time" length="8" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <property name="accCount" type="java.lang.Integer">
+            <column name="acc_count" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.WishlistHasGrnHasProducts" table="wishlist_has_grn_has_products" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idwishlistHasGrnProducts" type="java.lang.Integer">
+            <column name="IdwishlistHasGrnProducts" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="grnHasProducts" class="DB.GrnHasProducts" fetch="select">
+            <column name="grn_has_products_IdGRNhasProduct" not-null="true" />
+        </many-to-one>
+        <many-to-one name="wishlist" class="DB.Wishlist" fetch="select">
+            <column name="wishlist_idWishList" not-null="true" />
+        </many-to-one>
+        <property name="wishAddDate" type="date">
+            <column name="WishAddDate" length="10" />
+        </property>
+        <property name="wishAddTime" type="time">
+            <column name="WishAddTime" length="8" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

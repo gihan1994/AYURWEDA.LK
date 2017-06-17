@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Feedback" table="feedback" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idFeedBack" type="int">
+            <column name="idFeedBack" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="DB.User" fetch="select">
+            <column name="User_idUser" not-null="true" />
+        </many-to-one>
+        <property name="message" type="string">
+            <column name="Message" length="1000" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="45" />
+        </property>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

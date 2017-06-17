@@ -1,0 +1,130 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 3, 2016, 11:03:40 AM
+    Author     : Gihan
+*/
+
+
+
+.mybtnfooter{
+    
+    background: #e44514;
+    color: #fff; 
+    border-color:#e44514 
+    
+}
+.loginbtn{
+    background:white;
+    color:#400502;
+    border-color:#400502; 
+    
+}
+.loginbtn:hover{
+      background:#400502;
+      color:#ffffff;
+    border-color:#400502; 
+    
+}
+.footer-icon-color{
+    background-color:white;
+    border-radius:5px;
+    
+    
+}
+.footer-icon-color:hover{
+   background-color:#e44514; 
+    border-radius:5px;
+}
+.hedder-search-btn{
+    
+    background-color:#ffff00;
+     border-color:#ffff00; 
+}
+.admin-btn{
+     background-color:#9900ff; 
+     border-color:#9900ff;
+     color:#fff;
+}
+.hedder-btn{
+ border: 1px solid #f50;
+    cursor: pointer;
+    color: #f50;
+ background-color: white; 
+    text-overflow: ellipsis;
+    font-weight: bold;
+     /*background-color:transparent*/ 
+    
+}
+.hedder-btn:hover{
+     border: 1px solid #f50;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+ background-color:#f50; 
+    text-overflow: ellipsis;
+}
+.addcart-btn{
+    border: 1px solid #00b534;
+    cursor: pointer;
+    color: #00b534;
+ background-color: white; 
+    text-overflow: ellipsis;  font-weight: bold;
+    
+    
+     /*background-color:transparent*/ 
+    
+}
+.addcart-btn:hover{
+     border: 1px solid #00b534;
+    cursor: pointer;
+    color: white;
+ background-color:#00b534; 
+    text-overflow: ellipsis;  font-weight: bold;
+}
+.cart-btn:hover{
+  width:50px;
+  height:50px;
+  
+  
+  background-image:url(img/cart_hover.png);
+    
+}
+.cart-btn{
+  width:50px;
+  height:50px;
+  
+  
+  background-image:url(img/cart.png);  
+    
+}
+
+.admin-product-viewbtn{
+    background-color: #000000;
+    color: #ff3300;
+      border-color:#000000;
+}
+.admin-product-viewbtn:hover{
+    background-color: #ff3300;
+    color: #000000;
+      border-color:#ff3300;
+}
+
+.adminproductbar:active{
+    
+    background-color: #ffff00;
+    
+}
+.cofirmbtn{
+    background-color: #33e300;
+    border-color:#000000;
+    color: #000000;
+}
+.cofirmbtn:hover{
+    background-color: #33ff00;
+    border-color:#33ff00;
+    color: #000000;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.ProductsHasSupplier" table="products_has_supplier" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idGrn" type="java.lang.Integer">
+            <column name="idGrn" />
+            <generator class="identity" />
+        </id>
+        <property name="productsIdProducts" type="int">
+            <column name="Products_idProducts" not-null="true" />
+        </property>
+        <property name="supplierIdSupplier" type="int">
+            <column name="Supplier_idSupplier" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

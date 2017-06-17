@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 1, 2017 3:38:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="DB.Grn" table="grn" catalog="ayurwedalkdb" optimistic-lock="version">
+        <id name="idGrn" type="java.lang.Integer">
+            <column name="idGRN" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="supplier" class="DB.Supplier" fetch="select">
+            <column name="Supplier_idSupplier" not-null="true" />
+        </many-to-one>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+        <property name="PCount" type="java.lang.Integer">
+            <column name="p_count" />
+        </property>
+        <property name="total" type="java.lang.Double">
+            <column name="total" precision="22" scale="0" />
+        </property>
+        <property name="totalqty" type="java.lang.Integer">
+            <column name="totalqty" />
+        </property>
+        <property name="existqty" type="java.lang.Integer">
+            <column name="existqty" />
+        </property>
+        <property name="grnstatus" type="string">
+            <column name="grnstatus" length="45" />
+        </property>
+        <property name="addstatus" type="string">
+            <column name="addstatus" length="45" />
+        </property>
+        <set name="grnHasProductses" table="grn_has_products" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="GRN_idGRN" not-null="true" />
+            </key>
+            <one-to-many class="DB.GrnHasProducts" />
+        </set>
+    </class>
+</hibernate-mapping>
